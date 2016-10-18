@@ -10,7 +10,7 @@ public class TFrame extends JFrame
 {
     public TFrame()
     {
-        setTitle("Person");
+        setTitle("Contact Book");
         setBounds(100,100,700,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

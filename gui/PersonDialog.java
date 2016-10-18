@@ -21,6 +21,7 @@ public class PersonDialog extends JDialog
 
     public PersonDialog()
     {
+        setTitle("Create Person");
         setLayout(null);
         setModal(true);
         setBounds(300, 300, 210, 250);

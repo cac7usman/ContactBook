@@ -17,7 +17,7 @@ public class PersonDAO_Mock implements PersonDAO
         pp = new ArrayList<Person>();
 
         Person p = new Person (1, "Alejandro", "Gonzales", 26);
-        Person p1 = new Person (2, "Marjan", "Burjan", 24);
+       // Person p1 = new Person (2, "Marjan", "Burjan", 24);
         Person p2 = new Person (3, "Honza", "Sikovny", 22);
 
         p.addPhone(new Phone(1, "050 123 45 67", "home"));
@@ -26,9 +26,9 @@ public class PersonDAO_Mock implements PersonDAO
 
         pp.add(p);
 
-        p1.addPhone(new Phone(1, "050 121 31 41", "cellphone"));
+       // p1.addPhone(new Phone(5, "050 121 31 41", "c"));
 
-        pp.add(p1);
+       // pp.add(p1);
         pp.add(p2);
     }
     @Override
@@ -62,19 +62,22 @@ public class PersonDAO_Mock implements PersonDAO
     }
 
     @Override
-    public void createPhone(Phone ph, Person p) {
-        p.phoneList.add(ph);
+    public void createPhone(Phone ph)
+    {
+       ph.person.phoneList.add(ph);
     }
 
     @Override
-    public void deletePhone(Phone ph, Person p) {
+    public void deletePhone(Phone ph) {
 
         // rewrite with iterator!
-        for (Phone c1 : p.phoneList) {
-            if (c1.num.equals(ph.num)) {
-                p.phoneList.remove(c1);
-            }
-        }
+       ph.person.phoneList.remove(ph);
+    }
+
+    @Override
+    public void updatePhone(Phone ph)
+    {
+
     }
 
     @Override
@@ -84,6 +87,20 @@ public class PersonDAO_Mock implements PersonDAO
             Person tmp = pp.get(i);
             if (tmp.id == id) {
                 pp.remove(i);
+            }
+        }
+    }
+
+    @Override
+    public void createPhone(Phone ph, Person p) {
+        p.phoneList.add(ph);
+    }
+
+    @Override
+    public void deletePhone(Phone ph, Person p) {
+        for (Phone c1 : p.phoneList) {
+            if (c1.num.equals(ph.num)) {
+                p.phoneList.remove(c1);
             }
         }
     }

@@ -2,9 +2,11 @@ package gui;
 
 import logic.Person;
 import logic.Phone;
+import logic.TableModelPhone;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +25,12 @@ public class PersonPhoneDialog extends JDialog
     TableModel tmPhone;
     JTable tblPhone;
     public boolean flag = false;
-    List<Phone> phoneList;
+    public Person p;
 
-    public PersonPhoneDialog()
+    public PersonPhoneDialog(Person p)
     {
+        this.p = p;
+        setTitle("Person");
         setLayout(null);
         setModal(true);
         setBounds(300, 400, 200, 350);
@@ -51,37 +55,45 @@ public class PersonPhoneDialog extends JDialog
 
         // --------------Text Fields ----------------
 
-        txt_id = new JTextField();
+        txt_id = new JTextField("" + p.id);
         txt_id.setBounds(60, 10, 100, 20);
         add(txt_id);
 
-        txt_fname = new JTextField();
+        txt_fname = new JTextField("" + p.fname);
         txt_fname.setBounds(60, 40, 100, 20);
         add(txt_fname);
 
-        txt_lname = new JTextField();
+        txt_lname = new JTextField("" + p.lname);
         txt_lname.setBounds(60, 70, 100, 20);
         add(txt_lname);
 
-        txt_age = new JTextField();
+        txt_age = new JTextField("" + p.age);
         txt_age.setBounds(60, 100, 100, 20);
         add(txt_age);
 
         // --------------Table Model Phones ----------------
 
-        JScrollPane jScrollPane1;
-        Object[] columnNames = { "Number", "Type" };
-        Object[][] data = { { "", "" }, { "", "" } };
+        TableModelPhone tmPhone = new TableModelPhone(p);
+        JTable tblPhone = new JTable(tmPhone);
 
-        TableModel model = new DefaultTableModel(data, columnNames);
-        tblPhone = new JTable(model);
-        tblPhone.getColumnModel().getColumn(1).setPreferredWidth(20);
-        jScrollPane1 = new JScrollPane(tblPhone);
-        jScrollPane1.setBounds(10, 160, 160, 100);
-        getContentPane().add(jScrollPane1);
-        tmPhone = (DefaultTableModel) tblPhone.getModel();
+        JScrollPane jScrollPane = new JScrollPane(tblPhone);
+        jScrollPane.setBounds(10, 160, 160, 100);
+        add(jScrollPane);
+        tblPhone.addMouseListener(tmPhone.aSelect);
+
+
 
         // --------------Buttons ----------------
+
+        JButton btnAddPhone = new JButton("Add Phone");
+        btnAddPhone.setBounds(95, 290, 75, 20);
+        add(btnAddPhone);
+        btnAddPhone.addActionListener(tmPhone.aCreate);
+
+        JButton btnDelPhone = new JButton("Del Phone");
+        btnDelPhone.setBounds(95, 320, 75, 20);
+        add(btnDelPhone);
+        btnDelPhone.addActionListener(tmPhone.aDelete);
 
         JButton btnOk = new JButton("Ok");
         btnOk.setBounds(10, 270, 75, 20);
@@ -117,19 +129,8 @@ public class PersonPhoneDialog extends JDialog
 
     }
 
-    public void setPerson(Person p) {
 
-        txt_id.setText("" + p.id);
-        txt_fname.setText("" + p.fname);
-        txt_lname.setText("" + p.lname);
-        txt_age.setText("" + p.age);
 
-        phoneList = p.phoneList;
 
-        ((DefaultTableModel) tmPhone).setRowCount(0);
-        for (Phone ph : phoneList) {
-            ((DefaultTableModel) tmPhone).addRow(new String[] { ph.num, ph.type });
-        }
 
-    }
 }

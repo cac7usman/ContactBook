@@ -19,8 +19,10 @@ public class PhoneDialog extends JDialog
     Person p;
     public boolean flag = false;
 
-    public PhoneDialog()
+    public PhoneDialog(Person p)
     {
+        this.p = p;
+        setTitle("Phone");
         setLayout(null);
         setModal(true);
         setBounds(300, 300, 200, 200);
@@ -67,7 +69,8 @@ public class PhoneDialog extends JDialog
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                flag = false;
+                setVisible(false);
             }
         });
 
@@ -78,7 +81,6 @@ public class PhoneDialog extends JDialog
     }
 
     public Phone getPhone() {
-        int id = Integer.parseInt(txt_id.getText());
         String num = txt_num.getText();
         String type = txt_type.getText();
         Phone phone = new Phone(num, type, p);

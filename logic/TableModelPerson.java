@@ -19,6 +19,7 @@ public class TableModelPerson extends AbstractTableModel
 {
     ArrayList<Person> pp = null;
     PersonDAO pd = new PersonDAO_Mock();
+    public Person p;
 
     public int currentRow = 0;
 
@@ -128,7 +129,7 @@ public class TableModelPerson extends AbstractTableModel
 
         @Override
         public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_DELETE && currentRow != 0) // testing with currentRow == 0
+        if (e.getKeyCode() == KeyEvent.VK_DELETE)
         {
             Person p = pp.get(currentRow);
             pd.delete(p);
@@ -154,8 +155,7 @@ public class TableModelPerson extends AbstractTableModel
             if (e.getClickCount() == 2)
             {
                 Person p = pp.get(currentRow);
-                PersonPhoneDialog dia = new PersonPhoneDialog();
-                dia.setPerson(p);
+                PersonPhoneDialog dia = new PersonPhoneDialog(p);
                 dia.setVisible(true);
                 if (dia.flag == true)
                 {
@@ -192,7 +192,7 @@ public class TableModelPerson extends AbstractTableModel
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            PhoneDialog dia = new PhoneDialog();
+            PhoneDialog dia = new PhoneDialog(p);
             dia.setId(pp.get(currentRow).id);
             dia.setVisible(true);
             if (dia.flag == true) {
@@ -209,7 +209,7 @@ public class TableModelPerson extends AbstractTableModel
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            PhoneDialog dia = new PhoneDialog();
+            PhoneDialog dia = new PhoneDialog(p);
             dia.setId(pp.get(currentRow).id);
             dia.setVisible(true);
             if (dia.flag == true) {
