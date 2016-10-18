@@ -81,6 +81,8 @@ public class PersonPhoneDialog extends JDialog
         add(jScrollPane);
         tblPhone.addMouseListener(tmPhone.aSelect);
 
+        tblPhone.addKeyListener(tmPhone.aDelete);
+
 
 
         // --------------Buttons ----------------
@@ -90,10 +92,10 @@ public class PersonPhoneDialog extends JDialog
         add(btnAddPhone);
         btnAddPhone.addActionListener(tmPhone.aCreate);
 
-        JButton btnDelPhone = new JButton("Del Phone");
+        /*JButton btnDelPhone = new JButton("Del Phone");
         btnDelPhone.setBounds(95, 320, 75, 20);
         add(btnDelPhone);
-        btnDelPhone.addActionListener(tmPhone.aDelete);
+        btnDelPhone.addKeyListener(tmPhone.aDelete);*/
 
         JButton btnOk = new JButton("Ok");
         btnOk.setBounds(10, 270, 75, 20);

@@ -25,31 +25,31 @@ public class PhoneDialog extends JDialog
         setTitle("Phone");
         setLayout(null);
         setModal(true);
-        setBounds(300, 300, 200, 200);
+        setBounds(300, 300, 220, 200);
 
         JLabel lbl_id = new JLabel("Person ID:");
-        lbl_id.setBounds(10, 10, 50, 20);
+        lbl_id.setBounds(10, 10, 60, 20);
         add(lbl_id);
 
         txt_id = new JTextField();
-        txt_id.setBounds(60, 10, 100, 20);
+        txt_id.setBounds(80, 10, 100, 20);
         add(txt_id);
         txt_id.setEditable(false);
 
         JLabel lbl_num = new JLabel("Number: ");
-        lbl_num.setBounds(10, 40, 50, 20);
+        lbl_num.setBounds(10, 40, 60, 20);
         add(lbl_num);
 
         txt_num = new JTextField();
-        txt_num.setBounds(60, 40, 100, 20);
+        txt_num.setBounds(80, 40, 100, 20);
         add(txt_num);
 
         JLabel lbl_type = new JLabel("Type: ");
-        lbl_type.setBounds(10, 70, 50, 20);
+        lbl_type.setBounds(10, 70, 60, 20);
         add(lbl_type);
 
         txt_type = new JTextField();
-        txt_type.setBounds(60, 70, 100, 20);
+        txt_type.setBounds(80, 70, 100, 20);
         add(txt_type);
 
         JButton btnOk = new JButton("Ok");

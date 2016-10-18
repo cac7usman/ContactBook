@@ -4,13 +4,9 @@ import dao.PersonDAO;
 import dao.PersonDAO_Mock;
 import gui.PhoneDialog;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.List;
 
 /**
@@ -19,7 +15,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class TableModelPhone extends AbstractTableModel
 {
-    List<Phone> phoneList;
+    List<Phone> phList;
 
     PersonDAO pd = new PersonDAO_Mock();
 
@@ -34,7 +30,7 @@ public class TableModelPhone extends AbstractTableModel
     public TableModelPhone(Person p)
     {
         this.p = p;
-        phoneList = p.phoneList;
+        phList = p.phoneList;
 
     }
 
@@ -46,17 +42,17 @@ public class TableModelPhone extends AbstractTableModel
 
     @Override
     public int getRowCount() {
-        return 2;
+        return phList.size();
     }
 
     @Override
     public int getColumnCount() {
-        return phoneList.size();
+        return 2;
     }
 
     @Override
     public Object getValueAt(int row, int col) {
-        Phone ph = phoneList.get(row);
+        Phone ph = phList.get(row);
         Object ret = null;
         switch (col)
         {
@@ -74,7 +70,7 @@ public class TableModelPhone extends AbstractTableModel
     @Override
     public void setValueAt (Object val, int row, int col)
     {
-        Phone ph = phoneList.get(row);
+        Phone ph = phList.get(row);
         switch (col)
         {
             case 0:
@@ -135,12 +131,36 @@ public class TableModelPhone extends AbstractTableModel
         }
     }
 
-    class ActionDelete implements ActionListener
+    class ActionDelete implements KeyListener
     {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            pd.deletePhone(phoneList.get(currentRow));
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_DELETE)
+            {
+                Phone phone = phList.get(currentRow);
+                pd.deletePhone(phone);
+                fireTableDataChanged();
+            }
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
+
+
+
+
+
+       /* @Override
+        public void actionPerformed(ActionEvent e) {
+            pd.deletePhone(phList.get(currentRow));
+        }*/
     }
 }

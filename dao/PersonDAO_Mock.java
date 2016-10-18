@@ -17,7 +17,7 @@ public class PersonDAO_Mock implements PersonDAO
         pp = new ArrayList<Person>();
 
         Person p = new Person (1, "Alejandro", "Gonzales", 26);
-       // Person p1 = new Person (2, "Marjan", "Burjan", 24);
+        Person p1 = new Person (2, "Marjan", "Burjan", 24);
         Person p2 = new Person (3, "Honza", "Sikovny", 22);
 
         p.addPhone(new Phone(1, "050 123 45 67", "home"));
@@ -26,9 +26,9 @@ public class PersonDAO_Mock implements PersonDAO
 
         pp.add(p);
 
-       // p1.addPhone(new Phone(5, "050 121 31 41", "c"));
+        p1.addPhone(new Phone(5, "050 121 31 41", "c"));
 
-       // pp.add(p1);
+        pp.add(p1);
         pp.add(p2);
     }
     @Override
