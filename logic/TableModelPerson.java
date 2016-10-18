@@ -81,15 +81,25 @@ public class TableModelPerson extends AbstractTableModel
     {
         String str = "";
 
-        if (p.phoneList.size() > 0)
+        if (p.phoneList == null)
+        {
+            return str = "-";
+        }
+        else if (p.phoneList.size() > 0)
         {
             str = p.phoneList.get(0).num;
             if (p.phoneList.size() >= 1)
             {
                 str += "(+" + (p.phoneList.size() - 1) + ")";
             }
+            return str;
         }
-        return str;
+
+            return "";
+
+
+
+
     }
 
     public class ActionCreate implements ActionListener

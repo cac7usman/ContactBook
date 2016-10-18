@@ -31,7 +31,7 @@ public class Person implements Serializable
 
     @ElementCollection (targetClass = Phone.class)
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
-    public List<Phone> phoneList;
+    public List<Phone> phoneList = new ArrayList<Phone>(); // not working with Hibernate?!
 
     public List<Phone> getPhoneList()
     {
@@ -96,7 +96,6 @@ public class Person implements Serializable
     public void addPhone (Phone phone)
     {
         phone.setPerson(this);
-        phoneList = new ArrayList<Phone>(); // this line for mockup working
         getPhoneList().add(phone);
     }
 
