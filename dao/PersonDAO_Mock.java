@@ -75,8 +75,14 @@ public class PersonDAO_Mock implements PersonDAO
     }
 
     @Override
-    public void updatePhone(Phone ph)
+    public void updatePhone(Phone ph) {
+
+    }
+
+    @Override
+    public void updatePhone(Phone ph, int i)
     {
+    ph.person.phoneList.set(i, ph);
 
     }
 

@@ -80,7 +80,7 @@ public class TableModelPhone extends AbstractTableModel
                 ph.type = (String) val;
                 break;
         }
-        pd.updatePhone(ph);
+        pd.updatePhone(ph, currentRow);
     }
 
     @Override
@@ -153,14 +153,5 @@ public class TableModelPhone extends AbstractTableModel
 
         }
 
-
-
-
-
-
-       /* @Override
-        public void actionPerformed(ActionEvent e) {
-            pd.deletePhone(phList.get(currentRow));
-        }*/
     }
 }

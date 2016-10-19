@@ -2,6 +2,7 @@ package logic;
 
 import dao.PersonDAO;
 import dao.PersonDAO_Mock;
+import dao.PersonDAO_MySQL;
 import gui.PersonDialog;
 import gui.PersonPhoneDialog;
 import gui.PhoneDialog;
@@ -18,7 +19,8 @@ import java.util.ArrayList;
 public class TableModelPerson extends AbstractTableModel
 {
     ArrayList<Person> pp = null;
-    PersonDAO pd = new PersonDAO_Mock();
+    //PersonDAO pd = new PersonDAO_Mock();
+    PersonDAO pd = new PersonDAO_MySQL();
     public Person p;
 
     public int currentRow = 0;

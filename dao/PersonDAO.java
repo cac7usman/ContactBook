@@ -21,5 +21,6 @@ public interface PersonDAO
 
     void createPhone(Phone ph, Person p);
     void deletePhone(Phone ph, Person p);
+    void updatePhone(Phone ph, int i);
 
 }

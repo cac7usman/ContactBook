@@ -88,14 +88,9 @@ public class PersonPhoneDialog extends JDialog
         // --------------Buttons ----------------
 
         JButton btnAddPhone = new JButton("Add Phone");
-        btnAddPhone.setBounds(95, 290, 75, 20);
+        btnAddPhone.setBounds(30, 130, 130, 20);
         add(btnAddPhone);
         btnAddPhone.addActionListener(tmPhone.aCreate);
-
-        /*JButton btnDelPhone = new JButton("Del Phone");
-        btnDelPhone.setBounds(95, 320, 75, 20);
-        add(btnDelPhone);
-        btnDelPhone.addKeyListener(tmPhone.aDelete);*/
 
         JButton btnOk = new JButton("Ok");
         btnOk.setBounds(10, 270, 75, 20);
