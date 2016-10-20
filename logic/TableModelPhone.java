@@ -2,6 +2,7 @@ package logic;
 
 import dao.PersonDAO;
 import dao.PersonDAO_Mock;
+import dao.PersonDAO_MySQL;
 import gui.PhoneDialog;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +18,8 @@ public class TableModelPhone extends AbstractTableModel
 {
     List<Phone> phList;
 
-    PersonDAO pd = new PersonDAO_Mock();
+    //PersonDAO pd = new PersonDAO_Mock();
+    PersonDAO pd = new PersonDAO_MySQL();
 
     public Person p;
     public int currentRow;
@@ -143,7 +145,7 @@ public class TableModelPhone extends AbstractTableModel
             if (e.getKeyCode() == KeyEvent.VK_DELETE)
             {
                 Phone phone = phList.get(currentRow);
-                pd.deletePhone(phone);
+                pd.deletePhone(phone, p);
                 fireTableDataChanged();
             }
         }

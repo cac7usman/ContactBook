@@ -48,9 +48,9 @@ public class PersonDAO_MySQL implements PersonDAO
             while (result.next()) {
                 Person p = new Person(result.getInt(1), result.getString("fname"), result.getString(3),
                         result.getInt("age"));
-                /*for (Phone ph : addPhone(result.getInt(1))) {
+                for (Phone ph : addPhone(result.getInt(1))) {
                     p.addPhone(ph);
-                }*/
+                }
                 pp.add(p);
             }
 
@@ -106,13 +106,31 @@ public class PersonDAO_MySQL implements PersonDAO
     }
 
     @Override
-    public void createPhone(Phone ph) {
-
+    public void createPhone(Phone ph)
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbURL, username, password);
+            Statement st = connection.createStatement();
+            String sql_phone = "INSERT INTO Phone (phone_id, num, type) VALUES ('" + ph.person.id + "', '" + ph.num
+                    + "', " + ph.type + ")";
+            st.execute(sql_phone);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deletePhone(Phone ph) {
-
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbURL, username, password);
+            Statement st = connection.createStatement();
+            String sql_phone = "DELETE FROM Phone WHERE num = '" + ph.num + "'";
+            st.execute(sql_phone);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -120,18 +138,54 @@ public class PersonDAO_MySQL implements PersonDAO
 
     }
 
-    @Override
     public void createPhone(Phone ph, Person p) {
-
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbURL, username, password);
+            Statement st = connection.createStatement();
+            String sql_phone = "INSERT INTO Phone (phone_id, num, type) VALUES ('" + p.id + "', '" + ph.num
+                    + "', " + ph.type + ")";
+            st.execute(sql_phone);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
     public void deletePhone(Phone ph, Person p) {
-
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(dbURL, username, password);
+            Statement st = connection.createStatement();
+            String sql_phone = "DELETE FROM Phone WHERE num = '" + ph.num + "' AND phone_id=" + p.id;
+            st.execute(sql_phone);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updatePhone(Phone ph, int i) {
+
+    }
+
+    public ArrayList<Phone> addPhone(int id)
+    {
+        ArrayList<Phone> phoneList = new ArrayList<Phone>();
+        String sql = "SELECT * FROM PHONE WHERE PHONE_ID = " + id;
+
+        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                phoneList.add(new Phone(result.getInt(1), result.getString(2), result.getString(3)));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return phoneList;
 
     }
 }
