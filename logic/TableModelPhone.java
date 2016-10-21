@@ -1,6 +1,7 @@
 package logic;
 
 import dao.PersonDAO;
+import dao.PersonDAO_Hibernate;
 import dao.PersonDAO_Mock;
 import dao.PersonDAO_MySQL;
 import gui.PhoneDialog;
@@ -19,7 +20,8 @@ public class TableModelPhone extends AbstractTableModel
     List<Phone> phList;
 
     //PersonDAO pd = new PersonDAO_Mock();
-    PersonDAO pd = new PersonDAO_MySQL();
+    //PersonDAO pd = new PersonDAO_MySQL();
+    PersonDAO pd = new PersonDAO_Hibernate();
 
     public Person p;
     public int currentRow;

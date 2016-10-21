@@ -112,7 +112,7 @@ public class PersonDAO_MySQL implements PersonDAO
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             Statement st = connection.createStatement();
-            String sql_phone = "INSERT INTO Phone (phone_id, num, type) VALUES ('" + ph.person.id + "', '" + ph.num
+            String sql_phone = "INSERT INTO Phone (person_id, num, type) VALUES ('" + ph.person.id + "', '" + ph.num
                     + "', " + ph.type + ")";
             st.execute(sql_phone);
         } catch (ClassNotFoundException | SQLException e) {
@@ -143,7 +143,7 @@ public class PersonDAO_MySQL implements PersonDAO
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             Statement st = connection.createStatement();
-            String sql_phone = "INSERT INTO Phone (phone_id, num, type) VALUES ('" + p.id + "', '" + ph.num
+            String sql_phone = "INSERT INTO Phone (person_id, num, type) VALUES ('" + p.id + "', '" + ph.num
                     + "', " + ph.type + ")";
             st.execute(sql_phone);
         } catch (ClassNotFoundException | SQLException e) {
@@ -156,7 +156,7 @@ public class PersonDAO_MySQL implements PersonDAO
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             Statement st = connection.createStatement();
-            String sql_phone = "DELETE FROM Phone WHERE num = '" + ph.num + "' AND phone_id=" + p.id;
+            String sql_phone = "DELETE FROM Phone WHERE num = '" + ph.num + "' AND person_id=" + p.id;
             st.execute(sql_phone);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -171,7 +171,7 @@ public class PersonDAO_MySQL implements PersonDAO
     public ArrayList<Phone> addPhone(int id)
     {
         ArrayList<Phone> phoneList = new ArrayList<Phone>();
-        String sql = "SELECT * FROM PHONE WHERE PHONE_ID = " + id;
+        String sql = "SELECT * FROM PHONE WHERE PERSON_ID = " + id;
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
             Statement statement = conn.createStatement();

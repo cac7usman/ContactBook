@@ -2,6 +2,7 @@ package logic;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Alex-Notebook on 17.10.2016.
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "phone")
 
-public class Phone
+public class Phone implements Serializable
 {
     @Id
     @Column (name = "id")
@@ -28,6 +29,8 @@ public class Phone
     @ManyToOne
     @JoinColumn (name = "person_id")
     public Person person;
+
+
 
     public int getId() {
         return id;
