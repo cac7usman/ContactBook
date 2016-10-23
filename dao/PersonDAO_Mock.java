@@ -4,6 +4,7 @@ import logic.Person;
 import logic.Phone;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Alex-Notebook on 17.10.2016.
@@ -66,14 +67,6 @@ public class PersonDAO_Mock implements PersonDAO
     {
        ph.person.phoneList.add(ph);
     }
-
-    @Override
-    public void deletePhone(Phone ph) {
-
-        // rewrite with iterator!
-       ph.person.phoneList.remove(ph);
-    }
-
     @Override
     public void updatePhone(Phone ph) {
 
@@ -87,27 +80,29 @@ public class PersonDAO_Mock implements PersonDAO
     }
 
     @Override
-    public void delete(int id) {
-        // rewrite with iterator!
-        for (int i = 0; i < pp.size(); i++) {
-            Person tmp = pp.get(i);
-            if (tmp.id == id) {
-                pp.remove(i);
-            }
-        }
-    }
-
-    @Override
     public void createPhone(Phone ph, Person p) {
         p.phoneList.add(ph);
     }
 
     @Override
     public void deletePhone(Phone ph, Person p) {
-        for (Phone c1 : p.phoneList) {
-            if (c1.num.equals(ph.num)) {
-                p.phoneList.remove(c1);
+
+        for (Iterator<Phone> iterator = p.phoneList.iterator(); iterator.hasNext();)
+        {
+           Phone c1 = iterator.next();
+            {
+                if (c1.num.equals(ph.num))
+                {
+                    iterator.remove();
+                }
             }
         }
+
+    }
+
+    @Override
+    public void deletePhone(Phone ph) {
+    // not used in Mock
+    // consider about delete from other realizations
     }
 }

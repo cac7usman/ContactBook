@@ -91,19 +91,7 @@ public class PersonDAO_MySQL implements PersonDAO
 
     }
 
-    @Override
-    public void delete(int id) {
 
-        String sql = "DELETE FROM PERSON WHERE id=" + id;
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
 
     @Override
     public void createPhone(Phone ph)
@@ -112,8 +100,8 @@ public class PersonDAO_MySQL implements PersonDAO
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             Statement st = connection.createStatement();
-            String sql_phone = "INSERT INTO Phone (person_id, num, type) VALUES ('" + ph.person.id + "', '" + ph.num
-                    + "', " + ph.type + ")";
+            String sql_phone = "INSERT INTO Phone (num, type, person_id) VALUES ('" + ph.num + "', '" + ph.type
+                    + "', " + ph.person.id + ")";
             st.execute(sql_phone);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -143,8 +131,8 @@ public class PersonDAO_MySQL implements PersonDAO
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
             Statement st = connection.createStatement();
-            String sql_phone = "INSERT INTO Phone (person_id, num, type) VALUES ('" + p.id + "', '" + ph.num
-                    + "', " + ph.type + ")";
+            String sql_phone = "INSERT INTO Phone (num, type, person_id) VALUES ('" + ph.num + "', '" + ph.type
+                    + "', " + p.id + ")";
             st.execute(sql_phone);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -178,7 +166,7 @@ public class PersonDAO_MySQL implements PersonDAO
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next()) {
-                phoneList.add(new Phone(result.getInt(1), result.getString(2), result.getString(3)));
+                phoneList.add(new Phone(result.getString(2), result.getString(3), new Person(id, "", "", 0)));
 
             }
         } catch (SQLException e) {

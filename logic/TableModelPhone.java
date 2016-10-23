@@ -19,9 +19,9 @@ public class TableModelPhone extends AbstractTableModel
 {
     List<Phone> phList;
 
-    //PersonDAO pd = new PersonDAO_Mock();
-    //PersonDAO pd = new PersonDAO_MySQL();
-    PersonDAO pd = new PersonDAO_Hibernate();
+   // PersonDAO pd = new PersonDAO_Mock();
+    PersonDAO pd = new PersonDAO_MySQL();
+    //PersonDAO pd = new PersonDAO_Hibernate();
 
     public Person p;
     public int currentRow;

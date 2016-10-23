@@ -36,7 +36,7 @@ public class PersonDAO_Hibernate implements PersonDAO {
         }
 
 		/*
-		 * ArrayList<Phone> phoneList = new ArrayList<Phone>(); List<Phone> cont
+         * ArrayList<Phone> phoneList = new ArrayList<Phone>(); List<Phone> cont
 		 * = (List<Phone>) session.createQuery("from Phone").list(); for (Phone
 		 * c : (List<Phone>) cont) { phoneList.add(c); }
 		 *
@@ -128,19 +128,6 @@ public class PersonDAO_Hibernate implements PersonDAO {
 
     @Override
     public void updatePhone(Phone ph, int i) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-        Session session = createSession();
-        Transaction t = session.beginTransaction();
-        session.delete(id);// persisting the object
-        t.commit();// transaction is committed
-        session.close();
-
-        System.out.println("successfully saved");
 
     }
 
