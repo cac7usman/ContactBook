@@ -35,14 +35,7 @@ public class PersonDAO_Hibernate implements PersonDAO {
             pp.add(p);
         }
 
-		/*
-         * ArrayList<Phone> phoneList = new ArrayList<Phone>(); List<Phone> cont
-		 * = (List<Phone>) session.createQuery("from Phone").list(); for (Phone
-		 * c : (List<Phone>) cont) { phoneList.add(c); }
-		 *
-		 * for (Person person : pp) { for (Phone phone : phoneList) { if
-		 * (person.id == phone.person_id) { person.addPhone(phone); } } }
-		 */
+
 
         session.close();
 
@@ -88,7 +81,11 @@ public class PersonDAO_Hibernate implements PersonDAO {
 
     @Override
     public void createPhone(Phone ph) {
-
+        Session session = createSession();
+        Transaction t = session.beginTransaction();
+        session.persist(ph);// persisting the object
+        t.commit();// transaction is committed
+        session.close();
     }
 
     @Override
@@ -112,9 +109,10 @@ public class PersonDAO_Hibernate implements PersonDAO {
 
     @Override
     public void createPhone(Phone phone, Person p) {
+        Phone ph = new Phone(phone.num, phone.type, p);
         Session session = createSession();
         Transaction t = session.beginTransaction();
-        session.persist(phone);// persisting the object
+        session.persist(ph);// persisting the object
         t.commit();// transaction is committed
         session.close();
 
@@ -122,7 +120,14 @@ public class PersonDAO_Hibernate implements PersonDAO {
 
     @Override
     public void deletePhone(Phone phone, Person p) {
-        // TODO Auto-generated method stub
+
+        Phone ph = new Phone (phone.num, phone.type, p);
+        Session session = createSession();
+        Transaction t=session.beginTransaction();
+        session.delete(ph);//persisting the object
+        t.commit();//transaction is committed
+        session.close();
+        System.out.println("successfully deleted");
 
     }
 

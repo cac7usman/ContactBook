@@ -67,6 +67,12 @@ public class PersonDAO_Mock implements PersonDAO
     {
        ph.person.phoneList.add(ph);
     }
+
+    @Override
+    public void deletePhone(Phone ph) {
+
+    }
+
     @Override
     public void updatePhone(Phone ph) {
 
@@ -100,9 +106,4 @@ public class PersonDAO_Mock implements PersonDAO
 
     }
 
-    @Override
-    public void deletePhone(Phone ph) {
-    // not used in Mock
-    // consider about delete from other realizations
-    }
-}
+   }
